@@ -13,12 +13,12 @@ use timer::{AvrTimer1, U32Ext};
 
 fn app() {
     let dp = arduino_uno::Peripherals::take().unwrap();
-    let mut pins = arduino_uno::Pins::new(dp.PORTB, dp.PORTC, dp.PORTD);
+    let pins = arduino_uno::Pins::new(dp.PORTB, dp.PORTC, dp.PORTD);
 
     let mut serial = arduino_uno::Serial::new(
         dp.USART0,
         pins.d0,
-        pins.d1.into_output(&mut pins.ddr),
+        pins.d1.into_output(&pins.ddr),
         115200_u32.into_baudrate(),
     );
 
@@ -26,7 +26,7 @@ fn app() {
     timer.start(115200.hz());
 
     let rumba_serial =
-        bitbang_hal::serial::Serial::new(pins.d2.into_output(&mut pins.ddr), pins.d3, timer);
+        bitbang_hal::serial::Serial::new(pins.d2.into_output(&pins.ddr), pins.d3, timer);
     let rumba = Rumba::new(rumba_serial);
 
     ufmt::uwriteln!(&mut serial, "Starting Roomba").unwrap();
@@ -48,5 +48,5 @@ fn app() {
 #[arduino_uno::entry]
 fn main() -> ! {
     app();
-    loop {}
+    panic!("Application done!");
 }
