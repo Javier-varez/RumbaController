@@ -41,9 +41,7 @@ fn app() {
     ufmt::uwriteln!(&mut serial, "Playing first song").unwrap();
     rumba.play_song(rumba::SongSlot::First).unwrap();
     delay_ms(2500);
-    ufmt::uwriteln!(&mut serial, "Stoping Roomba").unwrap();
-
-    rumba.into_off();
+    ufmt::uwriteln!(&mut serial, "Done!").unwrap();
 }
 
 #[arduino_uno::entry]
