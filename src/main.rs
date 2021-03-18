@@ -25,8 +25,9 @@ fn app() {
     let mut timer = AvrTimer1::new(dp.TC1);
     timer.start(115200.hz());
 
-    let rumba_serial =
-        bitbang_hal::serial::Serial::new(pins.d2.into_output(&pins.ddr), pins.d3, timer);
+    let mut rumba_tx = pins.d2.into_output(&pins.ddr);
+    rumba_tx.set_high();
+    let rumba_serial = bitbang_hal::serial::Serial::new(rumba_tx, pins.d3, timer);
     let rumba = Rumba::new(rumba_serial);
 
     ufmt::uwriteln!(&mut serial, "Starting Roomba").unwrap();
