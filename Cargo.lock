@@ -143,7 +143,7 @@ dependencies = [
 [[package]]
 name = "rumba"
 version = "0.1.0"
-source = "git+https://github.com/Javier-varez/Rumba.git?branch=main#59f75b68bd2038d80779743636506f8cdbb453b7"
+source = "git+https://github.com/Javier-varez/Rumba.git?branch=main#f6d4c7e948002cd1bee745024f0a3f20fd985a6d"
 dependencies = [
  "embedded-hal",
  "nb 0.1.3",
